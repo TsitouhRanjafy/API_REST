@@ -9,8 +9,7 @@ export const InitRouterGet = (router: Router, service: InitServiceGet) => {
             const data = await service.getPagination(10);
             res.status(StatusCodes.OK).json({ "status": ReasonPhrases.OK, "pagination": data });
         } catch (error) {
-            console.error(" Error Route Init Get ",error);
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({"status": ReasonPhrases.INTERNAL_SERVER_ERROR});
+            throw error
         }
     })
 }

@@ -34,7 +34,7 @@ Emprunt.init(
         },
         date_emprunt: {
             type: DataTypes.DATE,
-            allowNull:false,
+            allowNull:false
         },
         date_retour: {
             type: DataTypes.DATE,

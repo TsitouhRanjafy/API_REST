@@ -14,7 +14,7 @@ export class CacheService {
             const result = this.cacheDASet.CacheSimpleData(cle,JSON.stringify(nombreToutLivre));
             return result;
         } catch (error) {
-            console.error(" Error Service Cache ",error)
+            throw error
         }
     }
 
@@ -24,7 +24,7 @@ export class CacheService {
             if (nombreToutLivre)
             return parseInt(JSON.parse(nombreToutLivre)[0].nombreToutLivre);
         } catch (error) {
-            console.error(" Error Cache Service getNombreToutLivre ",error)
+            throw error
         }
     }
 
@@ -33,7 +33,7 @@ export class CacheService {
             await this.cacheDADelete.RestoreCache();
             await this.CacheNombreToutLivre("nombreToutLivre");
         } catch (error) {
-            console.error(" Error Service Cache ",error)
+            throw error
         }
     }
 }
