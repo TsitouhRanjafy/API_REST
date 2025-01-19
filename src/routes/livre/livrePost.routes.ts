@@ -11,8 +11,7 @@ export const LivreRouterPost = (router: Router,  service: LivreServicePost ) => 
             const result = await service.NewLivre(newData)
             res.status(StatusCodes.OK).json({ "status": result })
         } catch (error) {
-            console.error(" Router Livre Post Error ",error);
-            res.status(StatusCodes.BAD_REQUEST).json({"status": ReasonPhrases.BAD_REQUEST});
+            throw error
         }
     })
 }

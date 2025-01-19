@@ -13,7 +13,7 @@ interface LivreAttributes {
     updatedAt: Date
 }
 
-export interface LivreCreationAttributes extends Optional<LivreAttributes,'nombre_emprunts' | 'createdAt' | 'updatedAt'> {}
+export interface LivreCreationAttributes extends Optional<LivreAttributes,'nombre_emprunts' | 'createdAt' | 'updatedAt' | 'disponible'> {}
 
 export class Livre extends Model<LivreAttributes,LivreCreationAttributes> implements LivreAttributes {
     public id!:string;
@@ -54,6 +54,7 @@ Livre.init(
         genre: {
             type: DataTypes.STRING,
             allowNull: false,
+            defaultValue: 'unknow'
         },
         nombre_emprunts: {
             type: DataTypes.INTEGER,

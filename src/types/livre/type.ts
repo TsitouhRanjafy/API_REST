@@ -2,7 +2,6 @@ export interface ILivre {
     titre: string,
     auteur: string,
     sortie: Date,
-    disponible: string,
     genre: string
 }
 

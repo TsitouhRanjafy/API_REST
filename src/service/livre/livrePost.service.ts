@@ -11,13 +11,12 @@ export class LivreServicePost {
 
     public async NewLivre(newDataWithoutId: Required<ILivre>): Promise< 0 | Livre | void> {
         try {
-            const id = uuidv4(); 
+            const id : string = uuidv4(); 
             const newData : LivreCreationAttributes = {
                 id: id,
                 titre: newDataWithoutId.titre,
                 auteur: newDataWithoutId.auteur,
-                sortie: newDataWithoutId.sortie,
-                disponible: newDataWithoutId.disponible,
+                sortie: newDataWithoutId.sortie,    
                 genre: newDataWithoutId.genre
             }
             if (!newData.titre) return 0;
@@ -26,7 +25,7 @@ export class LivreServicePost {
             await this.cacheService.reinitialiseCache();
             return data;
         } catch (error) {
-            console.error(" Service Livre Post Error ",error)
+            throw error
         }
     }
 }
