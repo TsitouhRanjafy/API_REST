@@ -3,15 +3,13 @@ import { CacheService } from "../cache/cache.service";
 export class InitServiceGet {
     constructor(private cacheService: CacheService){}
 
-    public async getPagination(dataOnePage: number): Promise<number | void> {
+    public async getNombreToutLivre(): Promise<number> {
         try {
-            const nbToutLivre = await this.cacheService.getNombreToutLivre();
-            if (nbToutLivre){
-                const n = Math.ceil(nbToutLivre / Math.floor(dataOnePage));
-                return n;
-            }
+            const nbToutLivre: number = await this.cacheService.getNombreToutLivre();
+            return nbToutLivre;
         } catch(error) {
-            console.error(" Error Service Init Get ",error);
+            throw error
         }
     }
+
 }

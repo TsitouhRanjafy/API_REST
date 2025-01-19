@@ -18,10 +18,10 @@ export class CacheService {
         }
     }
 
-    public async getNombreToutLivre(): Promise<number | void> {
+    public async getNombreToutLivre(): Promise<number> {
         try {
             const nombreToutLivre = await this.cacheDAGet.getCacheSimpleData("nombreToutLivre");
-            if (nombreToutLivre)
+            if (!nombreToutLivre) return 0;
             return parseInt(JSON.parse(nombreToutLivre)[0].nombreToutLivre);
         } catch (error) {
             throw error

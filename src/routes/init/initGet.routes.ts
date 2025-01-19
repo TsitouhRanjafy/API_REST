@@ -6,8 +6,8 @@ export const InitRouterGet = (router: Router, service: InitServiceGet) => {
 
     router.get('/', async (req: Request, res: Response) => {
         try {
-            const data = await service.getPagination(10);
-            res.status(StatusCodes.OK).json({ "status": ReasonPhrases.OK, "pagination": data });
+            const n = await service.getNombreToutLivre();
+            res.status(StatusCodes.OK).json({ "status": ReasonPhrases.OK, "nombreToutLivre": n });
         } catch (error) {
             throw error
         }
