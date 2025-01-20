@@ -1,5 +1,6 @@
-import express,{ Application } from "express";
+import express,{ Application , Request, Response, NextFunction} from "express";
 import dotenv from 'dotenv';
+import cors from 'cors';
 
 import { 
     EmpruntDAPost, 
@@ -50,11 +51,15 @@ const router = express.Router();
 const port = process.env.PORT || 3000
 
 
+app.use(cors({
+    origin: process.env.DOMAIN_ORIGIN,
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Access-Control-Allow-Origin', process.env.DOMAIN_ORIGIN || 'http://localhost:4200']
+}));
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use('/',router)
-// const routes : Route = new Route(app)
-// routes.initialiser();
 
 LivreRouterGet(router,new LivreServiceGet(new LivreDAGet,new CacheDataDASet,new CacheDataDAGet,new CacheService(new CacheDataDASet,new CacheDataDAGet,new LivreDAGet,new DACache)))
 UtilisateurRouterGet(router,new UtilisateurServiceGet(new UtilisateurDAGet))
