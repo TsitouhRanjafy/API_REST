@@ -1,6 +1,6 @@
 import { createClient } from "redis";
 
-export class DACache {
+export class CacheDataDADelete {
 
     public async RestoreCache(){
         const client = createClient();

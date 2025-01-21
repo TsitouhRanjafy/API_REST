@@ -1,4 +1,4 @@
-import { DACache, LivreDADelete, LivreDAGet } from "../../DA/index";
+import { LivreDADelete, LivreDAGet } from "../../DA/index";
 import { CacheService } from "../cache/cache.service";
 
 
@@ -15,12 +15,12 @@ export class LivreServiceDelete {
             const disponible = data.dataValues.disponible;
             if (disponible == "oui"){
                 const result = await this.livreDADelete.DeleteLivreById(Id);
-                await this.cacheService.reinitialiseCache();
+                await this.cacheService.RestoreCache();
                 return result;
             }
             return 0;
         } catch(error) {
-            console.error(" Error Service Livre Delete ",error)
+            throw error
         }
     }
 

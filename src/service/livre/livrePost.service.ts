@@ -17,12 +17,13 @@ export class LivreServicePost {
                 titre: newDataWithoutId.titre,
                 auteur: newDataWithoutId.auteur,
                 sortie: newDataWithoutId.sortie,    
-                genre: newDataWithoutId.genre
+                genre: newDataWithoutId.genre,
+                image_name: newDataWithoutId.image_name
             }
             if (!newData.titre) return 0;
             const data = await this.livreDAPost.NewLivre(newData)
             if (!data) return 0;
-            await this.cacheService.reinitialiseCache();
+            await this.cacheService.RestoreCache();
             return data;
         } catch (error) {
             throw error

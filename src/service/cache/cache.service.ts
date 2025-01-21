@@ -1,11 +1,11 @@
-import { CacheDataDAGet, CacheDataDASet, DACache, LivreDAGet } from "../../DA";
+import { CacheDataDAGet, CacheDataDASet, CacheDataDADelete, LivreDAGet } from "../../DA";
 
 export class CacheService {
     constructor(
         private cacheDASet: CacheDataDASet,
         private cacheDAGet: CacheDataDAGet,
         private livreDAGet: LivreDAGet,
-        private cacheDADelete: DACache
+        private cacheDADelete: CacheDataDADelete
     ){}
 
     public async CacheNombreToutLivre(cle: string){
@@ -28,7 +28,7 @@ export class CacheService {
         }
     }
 
-    public async reinitialiseCache(){
+    public async RestoreCache(): Promise<void>{
         try {
             await this.cacheDADelete.RestoreCache();
             await this.CacheNombreToutLivre("nombreToutLivre");

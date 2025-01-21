@@ -10,7 +10,7 @@ import { LivreDAPut } from "./Access/Livre/LivreDA.Put";
 import { LivreDAPost } from "./Access/Livre/livreDA.Post";
 import { CacheDataDASet } from "./Access/cache/cacheDA.Set";
 import { CacheDataDAGet } from "./Access/cache/cacheDA.Get";
-import { DACache } from "./Access/cache/cacheDA.delete";
+import { CacheDataDADelete } from "./Access/cache/cacheDA.delete";
 import { EmpruntDADelete } from "./Access/Emprunt/empruntDA.Delete";
 
 
@@ -28,6 +28,6 @@ export {
     LivreDAPost,
     CacheDataDASet,
     CacheDataDAGet,
-    DACache,
+    CacheDataDADelete,
     EmpruntDADelete
 }

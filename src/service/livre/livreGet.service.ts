@@ -16,16 +16,17 @@ export class LivreServiceGet {
             const nbToutLivre : number | void = await this.cacheService.getNombreToutLivre();
             if (!nbToutLivre) return;
             if(offset>=0 && limit>=0 && limit<=nbToutLivre){
-                const dataCache = await this.cacheDataDAGet.getCacheSimpleData(`livreOffset${offset}Limit${limit}`);
+                const dataCache = null // await this.cacheDataDAGet.getCacheSimpleData(`livreOffset${offset}Limit${limit}`);
                 if (!dataCache){
                     const data = await this.livreDAGet.GetLivres(offset,limit);
+                    console.log(data);
                     await this.cacheDataDASet.CacheSimpleData(`livreOffset${offset}Limit${limit}`,JSON.stringify(data))
                     return data;
                 }
                 return JSON.parse(dataCache);
             }
         } catch (error) {
-            console.error(" Error Service Livre Get ",error)
+            throw error
         }
     }
 
@@ -34,16 +35,16 @@ export class LivreServiceGet {
             const nbToutLivre : number | void = await this.cacheService.getNombreToutLivre();
             if (!nbToutLivre) return;
             if (triMethode && offset>=0 && limit>=0 && limit<=nbToutLivre){
-                const dataCache = await this.cacheDataDAGet.getCacheSimpleData(`livreOffset${offset}Limit${limit}Tri${triMethode}`);
+                const dataCache =  await this.cacheDataDAGet.getCacheSimpleData(`livreOffset${offset}Limit${limit}Tri${triMethode}`);
                 if (!dataCache){
-                    const data = await this.livreDAGet.GetLivres(offset,limit,triMethode)
+                    const data: Livre[] | void = await this.livreDAGet.GetLivres(offset,limit,triMethode)
                     await this.cacheDataDASet.CacheSimpleData(`livreOffset${offset}Limit${limit}Tri${triMethode}`,JSON.stringify(data))
                     return data;
                 }
                 return JSON.parse(dataCache);
             }
         } catch (error) {
-            console.error(" Error Service Livre Get ",)
+            throw error
         }
     }
 

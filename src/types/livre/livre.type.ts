@@ -9,11 +9,12 @@ interface LivreAttributes {
     disponible: string,
     genre: string,
     nombre_emprunts: number,
+    image_name: string,
     createdAt: Date,
     updatedAt: Date
 }
 
-export interface LivreCreationAttributes extends Optional<LivreAttributes,'nombre_emprunts' | 'createdAt' | 'updatedAt' | 'disponible'> {}
+export interface LivreCreationAttributes extends Optional<LivreAttributes,'nombre_emprunts' | 'createdAt' | 'updatedAt' | 'disponible' | 'image_name'> {}
 
 export class Livre extends Model<LivreAttributes,LivreCreationAttributes> implements LivreAttributes {
     public id!:string;
@@ -23,6 +24,7 @@ export class Livre extends Model<LivreAttributes,LivreCreationAttributes> implem
     public disponible!: string;
     public genre!: string;
     public nombre_emprunts!: number;
+    public image_name!: string;
     public createdAt!: Date;
     public updatedAt!: Date;
 }
@@ -60,6 +62,11 @@ Livre.init(
             type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 0
+        },
+        image_name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: "imageurl"
         },
         createdAt: {
             type: DataTypes.DATE,
