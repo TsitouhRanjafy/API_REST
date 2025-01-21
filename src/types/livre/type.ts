@@ -7,7 +7,7 @@ export interface ILivre {
 
 export enum triMethodeLivre {
     ASC_BY_DATESORTIE=1,
-    ASC_BY_DATEALPHABETIQUE=2,
+    ASC_BY_ALPHABETIQUE=2,
     DESC_BY_DATESORTIE=3,
-    DESC_BY_DATEALPHABETIQUE=4
+    DESC_BY_ALPHABETIQUE=4
 }

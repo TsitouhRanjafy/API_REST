@@ -7,11 +7,11 @@ export class LivreDAGet extends DBManager {
     public async GetLivres(offset: number, limit: number,triMethode: triMethodeLivre | void): Promise<Livre[] | void>{
         const deferredQuery = (): Promise<any> => {
                 switch (triMethode) {
-                    case triMethodeLivre.ASC_BY_DATEALPHABETIQUE:
+                    case triMethodeLivre.ASC_BY_ALPHABETIQUE:
                         return Livre.findAll({
                             order: [['titre','ASC']],
                             limit: limit,
-                            offset: offset
+                            offset: offset,
                         });
                     case triMethodeLivre.ASC_BY_DATESORTIE:
                         return Livre.findAll({
@@ -25,7 +25,7 @@ export class LivreDAGet extends DBManager {
                             limit: limit,
                             offset: offset
                         });
-                    case triMethodeLivre.DESC_BY_DATEALPHABETIQUE:
+                    case triMethodeLivre.DESC_BY_ALPHABETIQUE:
                         return Livre.findAll({
                             order: [['sortie','DESC']],
                             limit: limit,
