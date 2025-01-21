@@ -39,7 +39,7 @@ sudo service redis-cli start
 
 Clonez le repos
 ```bash
-  git clone
+  git clone 
 ```
 Entrer dans notre dépot local et installé les dépendances
 ```bash
@@ -53,5 +53,15 @@ Si tout marche bien :+1:, vous verrez un message *DataBase Mysql Synchronised Su
 
 ## Route
 
+- **`GET LIVRE`** **Récupération**
+  - `GET '/book/:id'` récupérer un livre en fonction de son identifiant (ex: `http://localhost:4040/book/017f9cc9-8064-4c10`)
+  - `GET '/topbooks/:top'` récuperer les livres les plus emprunter en limitant par le nombre.
+  - `GET '/books/:offset/:limit'` obténir des livres en remplacant *offset* par le début de récuperation et *limit* pour le nombre de livre qu'on veut.
+  - `GET '/books/:offset/:limit/:tri'` comme précedant mais avec le triage.
+      |     tri         | ASC | DESC  |
+      |-----------------|-----|-------|
+      | DATE DE SORTIE  |  1  |   3   |
+      | TITRE           |  2  |   4   |
 
+- **`POST LIVRE`** **Insertion**
 
