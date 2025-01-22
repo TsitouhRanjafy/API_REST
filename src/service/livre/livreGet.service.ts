@@ -1,3 +1,4 @@
+import { error } from "console";
 import { CacheDataDAGet, CacheDataDASet, LivreDAGet } from "../../DA/index";
 import { Livre, triMethodeLivre } from "../../types";
 import { CacheService } from "../cache/cache.service";
@@ -56,10 +57,10 @@ export class LivreServiceGet {
         }
     }
     
-    public async GetTopLivres(top: number): Promise<Livre[] | void> {
+    public async GetTopLivres(top: number): Promise<Livre[]> {
         try {
             if (Math.floor(top)<=0){
-                return;
+                throw error
             }
             const dataCache = await this.cacheDataDAGet.getCacheSimpleData(`topLivre${top}`);
             if (!dataCache){
@@ -69,7 +70,16 @@ export class LivreServiceGet {
             }
             return JSON.parse(dataCache);
         } catch (error) {
-            console.error(" Error Service Livre Get ",error)
+            throw error
+        }
+    }
+
+    public async GetDernierEmpruntLivres(): Promise<Livre[] | void> {
+        try {
+            const dernierLivreEmprunters = await this.livreDAGet.getDernierLivreEmprunters();
+            return dernierLivreEmprunters;
+        } catch (error) {
+            throw error
         }
     }
 }

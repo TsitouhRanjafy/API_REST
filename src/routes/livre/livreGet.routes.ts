@@ -58,4 +58,14 @@ export const LivreRouterGet = (router: Router, service: LivreServiceGet): void =
             res.status(StatusCodes.BAD_REQUEST).send({"status": ReasonPhrases.BAD_REQUEST})
         }
     })
+
+    router.get('/books/lastborrow', async (req: Request, res: Response) =>{
+        try {
+            const data = await service.GetDernierEmpruntLivres();   
+            res.status(StatusCodes.OK).send(data);
+        } catch (error) {
+            res.status(StatusCodes.BAD_REQUEST).send({"status": ReasonPhrases.BAD_REQUEST})
+            throw error
+        }
+    })
 }

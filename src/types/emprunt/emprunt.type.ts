@@ -54,7 +54,7 @@ Emprunt.init(
             type: DataTypes.STRING,
             allowNull: false,
             references: {
-                model: Livre,
+                model: Livre,   
                 key: 'id'
             },
             onUpdate: 'CASCADE',

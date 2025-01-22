@@ -75,7 +75,7 @@ Livre.init(
     {
         sequelize,
         tableName: 'livres',
-        timestamps: true,
+        timestamps: true,   
         paranoid: true
     }
 )

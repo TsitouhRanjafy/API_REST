@@ -1,5 +1,5 @@
 import { DBManager } from "../../DBManager";
-import { Livre, triMethodeLivre } from "../../../types/index";
+import { Emprunt, Livre, triMethodeLivre } from "../../../types/index";
 import { sequelize } from "../../DBConnection/DBSync.mysql";
 
 export class LivreDAGet extends DBManager {
@@ -97,6 +97,30 @@ export class LivreDAGet extends DBManager {
             return nombreToutLivre;
         } catch (error) {
             console.error(" Error DA Livre Get ",error);
+        }
+    }
+
+    public async getDernierLivreEmprunters(){
+        const deferredQuery = (): Promise<any> => {
+            return Emprunt.findAll({
+                attributes: ['id_emprunt','date_emprunt','date_retour'],
+                include: [
+                    {
+                        model: Livre,
+                        as: 'livreEmprunter',
+                    }
+                ],
+                order: [
+                    ['date_emprunt','DESC']
+                ],
+                group: 'id_emprunt'
+            });
+        }
+        try {
+            const dernierLivreEmprunters = await this.ReadData(deferredQuery);
+            return dernierLivreEmprunters;
+        } catch (error){
+            throw error
         }
     }
 }
