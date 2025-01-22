@@ -76,8 +76,12 @@ export class LivreServiceGet {
 
     public async GetDernierEmpruntLivres(): Promise<Livre[] | void> {
         try {
-            const dernierLivreEmprunters = await this.livreDAGet.getDernierLivreEmprunters();
-            return dernierLivreEmprunters;
+            const dernierLivreEmprunters: Array<{ id_emprunt: string, livreEmprunter: Livre }> = await this.livreDAGet.getDernierLivreEmprunters();
+            let data: Livre[] = []
+            dernierLivreEmprunters.forEach(element => {
+                data.push(element.livreEmprunter)
+            });
+            return data;
         } catch (error) {
             throw error
         }

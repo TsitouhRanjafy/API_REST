@@ -103,7 +103,7 @@ export class LivreDAGet extends DBManager {
     public async getDernierLivreEmprunters(){
         const deferredQuery = (): Promise<any> => {
             return Emprunt.findAll({
-                attributes: ['id_emprunt','date_emprunt','date_retour'],
+                attributes: ['id_emprunt'],
                 include: [
                     {
                         model: Livre,
