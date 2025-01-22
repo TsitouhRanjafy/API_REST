@@ -53,7 +53,7 @@ Si tout marche bien :+1:, vous verrez un message *DataBase Mysql Synchronised Su
 
 ## Route
 
-- **`GET LIVRE`** **Récupération**
+- **`GET LIVRE`** **Récupération de Livre**
   - `GET '/book/:id'` récupérer un livre en fonction de son identifiant (ex: `http://localhost:4040/book/017f9cc9-8064-4c10`)
   - `GET '/topbooks/:top'` récuperer les livres les plus emprunter en limitant par le nombre.
   - `GET '/books/:offset/:limit'` obténir des livres en remplacant *offset* par le début de récuperation et *limit* pour le nombre de livre qu'on veut.
@@ -63,5 +63,50 @@ Si tout marche bien :+1:, vous verrez un message *DataBase Mysql Synchronised Su
       | DATE DE SORTIE  |  1  |   3   |
       | TITRE           |  2  |   4   |
 
-- **`POST LIVRE`** **Insertion**
+- **`POST LIVRE`** **Insertion de Livre**
+    - `POST '/new/book'` ajout un livre avec le propriété suivant 
+      {
+        *titre*: string,
+        *auteur*: string,
+        *sortie*: Date,
+        *genre*: string,
+        *image_name*: string
+      }
+
+- **`DELETE LIVRE`** **Suppression de Livre**
+    - `DELETE '/book/:id'` supprimer un livre en fonction de son identifiant
+
+- **`PUT LIVRE`** **Modification de Livre**
+    - `PUT '/book/:id'` modifier un livre en fonction de son identifiant en ajoutant un nouveau donnée qui doit avoir les propriétés suivant
+      {
+        *titre*: string,
+        *auteur*: string,
+        *sortie*: Date,
+        *genre*: string,
+        *image_name*: string,
+      }
+
+- **`GET EMPRUNT`** **Récupération d'Emprunt**
+    - `GET '/emprunt/:id'` récupération d'emprunt en fonction de son identifiant
+    - `GET '/emprunts/current/:tri'` obtenir tout les emprunts courants en triant.
+    - `GET '/emprunt/book/:id'` récupérer l'emprunt d'un livre en ajoutant en paramètre l'identifiant du livre.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      
 
