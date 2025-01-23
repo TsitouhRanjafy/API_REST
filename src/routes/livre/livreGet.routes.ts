@@ -52,6 +52,7 @@ export const LivreRouterGet = (router: Router, service: LivreServiceGet): void =
         const { tri,offset,limit } = req.params
         try {
             const data = await service.GetLivresTri(parseInt(offset),parseInt(limit),parseInt(tri));
+            console.log(data);
             res.status(StatusCodes.OK).send(data);
         } catch (error) {
             console.error(" Error Router Livre Get ",error)

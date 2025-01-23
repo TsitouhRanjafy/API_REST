@@ -8,6 +8,7 @@ interface LivreAttributes {
     sortie: Date,
     disponible: string,
     genre: string,
+    image_url: string,
     nombre_emprunts: number,
     createdAt: Date,
     updatedAt: Date
@@ -22,6 +23,7 @@ export class Livre extends Model<LivreAttributes,LivreCreationAttributes> implem
     public sortie!: Date;
     public disponible!: string;
     public genre!: string;
+    public image_url!: string;
     public nombre_emprunts!: number;
     public createdAt!: Date;
     public updatedAt!: Date;
@@ -55,6 +57,10 @@ Livre.init(
             type: DataTypes.STRING,
             allowNull: false,
             defaultValue: 'unknow'
+        },
+        image_url: {
+            type: DataTypes.STRING,
+            allowNull: true
         },
         nombre_emprunts: {
             type: DataTypes.INTEGER,
