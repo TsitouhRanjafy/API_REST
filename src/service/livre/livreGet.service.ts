@@ -35,7 +35,7 @@ export class LivreServiceGet {
             const nbToutLivre : number | void = await this.cacheService.getNombreToutLivre();
             if (!nbToutLivre) return;
             if (triMethode && offset>=0 && limit>=0 && limit<=nbToutLivre){
-                const dataCache = null //await this.cacheDataDAGet.getCacheSimpleData(`livreOffset${offset}Limit${limit}Tri${triMethode}`);
+                const dataCache = await this.cacheDataDAGet.getCacheSimpleData(`livreOffset${offset}Limit${limit}Tri${triMethode}`);
                 if (!dataCache){
                     const data = await this.livreDAGet.GetLivres(offset,limit,triMethode)
                     await this.cacheDataDASet.CacheSimpleData(`livreOffset${offset}Limit${limit}Tri${triMethode}`,JSON.stringify(data))
