@@ -65,4 +65,20 @@ export class EmpruntDAGet extends DBManager {
             console.error(' Data Access Error', error)
         }
     }
+
+    public async GetEmpruntByUserId(id: string): Promise<Emprunt[]>{
+        try {
+            const userEmprunts: Emprunt[] = await Emprunt.findAll({
+                where: {
+                    id_utilisateur: id
+                },
+                order: [
+                    ['date_emprunt','DESC']
+                ]
+            })
+            return userEmprunts;
+        } catch (error) {
+            throw error
+        }
+    }
 }                                                                                                                   

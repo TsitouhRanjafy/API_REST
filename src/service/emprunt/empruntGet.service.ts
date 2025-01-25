@@ -30,4 +30,13 @@ export class EmpruntServiceGet {
             console.error(" Service Emprunt Error ",error)
         }
     }
+
+    public async GetAllEmpruntByUsersId(userId: string): Promise<Emprunt[]> {
+        try {
+            const allUserEmprunts = await this.empruntDAGet.GetEmpruntByUserId(userId);
+            return allUserEmprunts;
+        } catch (error) {
+            throw error
+        }
+    }
 }
