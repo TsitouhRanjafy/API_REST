@@ -1,5 +1,5 @@
 import { DBManager } from "../../DBManager";
-import { Emprunt, Livre, triMethodeLivre } from "../../../types/index";
+import { Emprunt, ILivre, Livre, triMethodeLivre } from "../../../types/index";
 import { sequelize } from "../../DBConnection/DBSync.mysql";
 
 export class LivreDAGet extends DBManager {
@@ -120,6 +120,15 @@ export class LivreDAGet extends DBManager {
             const dernierLivreEmprunters = await this.ReadData(deferredQuery);
             return dernierLivreEmprunters;
         } catch (error){
+            throw error
+        }
+    }
+
+    public async getToutLivres(){
+        try {
+            const toutLivres: Livre[] = await Livre.findAll();
+            return toutLivres;
+        } catch (error) {
             throw error
         }
     }

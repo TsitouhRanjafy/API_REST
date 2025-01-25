@@ -86,5 +86,19 @@ export class LivreServiceGet {
             throw error
         }
     }
+
+    public async GetToutLivres(): Promise<Livre[]> {
+        try {
+            const toutLivresCache: string | undefined | null = await this.cacheDataDAGet.getCacheSimpleData('toutLivres');
+            if (toutLivresCache){
+                return JSON.parse(toutLivresCache);
+            }
+            const toutLivres: Livre[] = await this.livreDAGet.getToutLivres();
+            await this.cacheDataDASet.CacheSimpleData('toutLivres',JSON.stringify(toutLivres))
+            return toutLivres;
+        } catch (error) {
+            throw error
+        }
+    }
 }
 
