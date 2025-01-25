@@ -31,9 +31,9 @@ export class EmpruntServiceGet {
         }
     }
 
-    public async GetAllEmpruntByUsersId(userId: string) {
+    public async GetAllLivresEmprunterByUsersId(userId: string) {
         try {
-            const allUserEmprunts: Array<{ id_emprunt: string, livreEmprunter: Livre }> = await this.empruntDAGet.GetByUserId(userId);
+            const allUserEmprunts: Array<{ id_emprunt: string, livreEmprunter: Livre }> = await this.empruntDAGet.GetLivresEmprunterByUserId(userId);
             let livres: Livre[] = [];
             allUserEmprunts.forEach((emprunt) => {
                 livres.push(emprunt.livreEmprunter)

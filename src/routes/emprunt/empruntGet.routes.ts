@@ -39,7 +39,7 @@ export const EmpruntRouterGet = (router: Router, service: EmpruntServiceGet) => 
     router.get('/emprunts/user/:id', async (req: Request, res: Response) => {
         const { id: id_utilisateur } = req.params
         try {
-            const allUserEmprunts = await service.GetAllEmpruntByUsersId(id_utilisateur) 
+            const allUserEmprunts = await service.GetAllLivresEmprunterByUsersId(id_utilisateur) 
             res.status(StatusCodes.OK).send(allUserEmprunts)
         } catch (error) {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({"status":ReasonPhrases.INTERNAL_SERVER_ERROR})
