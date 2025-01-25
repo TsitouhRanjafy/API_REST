@@ -28,6 +28,7 @@ sudo systemctl start mongod
 ```
 - lancer mysql:
 ```bash
+cd chemin_du_xamp
 sudo ./xampp start
 ```
 - lancer redis:
@@ -90,6 +91,15 @@ Si tout marche bien :+1:, vous verrez un message *DataBase Mysql Synchronised Su
     - `GET '/emprunt/:id'` récupération d'emprunt en fonction de son identifiant
     - `GET '/emprunts/current/:tri'` obtenir tout les emprunts courants en triant.
     - `GET '/emprunt/book/:id'` récupérer l'emprunt d'un livre en ajoutant en paramètre l'identifiant du livre.
+    - `GET '/emprunts/user/:id'` obtenir tout l'emprunt d'un utilisateur en utilisant l'identifiant d'un utilisateur.
+- **`POST EMPRUNT`** **Ajouter une nouvelle Emprunt**
+    - `POST '/new/emprunt/:idLivre/:idUtilisateur'`: ajouter une nouvelle emprunt en utilisant l'identifiant de l'utilisateur le livre à emprunter. Cette fois nécessite un champ supplémentaire
+      ```typescript
+      {
+        date_emprunt: Date,// "YYYY-MM-DD"
+        date_retour: Date // "YYYY-MM-DD"
+      }
+      ```
 
 
 
