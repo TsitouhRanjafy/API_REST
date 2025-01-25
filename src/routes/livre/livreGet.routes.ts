@@ -73,7 +73,6 @@ export const LivreRouterGet = (router: Router, service: LivreServiceGet): void =
     router.get('/books/all', async (req: Request,res: Response) => {
         try {
             const data = await service.GetToutLivres();
-            console.log(data.length);
             res.status(StatusCodes.OK).send(data);
         } catch (error) {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ "status": ReasonPhrases.INTERNAL_SERVER_ERROR })

@@ -43,7 +43,7 @@ export const EmpruntRouterGet = (router: Router, service: EmpruntServiceGet) => 
             res.status(StatusCodes.OK).send(allUserEmprunts)
         } catch (error) {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({"status":ReasonPhrases.INTERNAL_SERVER_ERROR})
-            throw error
+            throw error 
         }
     });
 

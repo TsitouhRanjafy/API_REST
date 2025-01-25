@@ -74,7 +74,7 @@ export class LivreServiceGet {
         }
     }
 
-    public async GetDernierEmpruntLivres(): Promise<Livre[] | void> {
+    public async GetDernierEmpruntLivres(): Promise<Livre[]> {
         try {
             const dernierLivreEmprunters: Array<{ id_emprunt: string, livreEmprunter: Livre }> = await this.livreDAGet.getDernierLivreEmprunters();
             let data: Livre[] = []

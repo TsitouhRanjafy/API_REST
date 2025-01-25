@@ -66,9 +66,16 @@ export class EmpruntDAGet extends DBManager {
         }
     }
 
-    public async GetEmpruntByUserId(id: string): Promise<Emprunt[]>{
+    public async GetByUserId(id: string){
         try {
-            const userEmprunts: Emprunt[] = await Emprunt.findAll({
+            const userEmprunts: any = await Emprunt.findAll({
+                attributes: ['id_emprunt'],
+                include: [
+                    {
+                        model: Livre,
+                        as: 'livreEmprunter',
+                    }
+                ],
                 where: {
                     id_utilisateur: id
                 },

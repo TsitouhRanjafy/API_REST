@@ -31,10 +31,14 @@ export class EmpruntServiceGet {
         }
     }
 
-    public async GetAllEmpruntByUsersId(userId: string): Promise<Emprunt[]> {
+    public async GetAllEmpruntByUsersId(userId: string) {
         try {
-            const allUserEmprunts = await this.empruntDAGet.GetEmpruntByUserId(userId);
-            return allUserEmprunts;
+            const allUserEmprunts: Array<{ id_emprunt: string, livreEmprunter: Livre }> = await this.empruntDAGet.GetByUserId(userId);
+            let livres: Livre[] = [];
+            allUserEmprunts.forEach((emprunt) => {
+                livres.push(emprunt.livreEmprunter)
+            })
+            return livres;
         } catch (error) {
             throw error
         }
