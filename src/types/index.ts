@@ -7,6 +7,7 @@ import { triEmprunt, IEmprunt } from "./emprunt/type";
 import { ILivre } from "./livre/type";
 import { triMethodeLivre } from "./livre/type";
 import { EmpruntHistorique , IEmpruntHistoriques } from "./emprunt/empruntHistorique.type";
+import { IPutUser, UserMongoose } from "./utilisateur/utilisateur.mongoose";
 
 export {
     IDBManager,
@@ -22,5 +23,7 @@ export {
     ILivre,
     triMethodeLivre,
     EmpruntHistorique,
-    IEmpruntHistoriques
+    IEmpruntHistoriques,
+    IPutUser,
+    UserMongoose
 }
