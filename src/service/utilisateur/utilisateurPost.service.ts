@@ -2,6 +2,7 @@ import { UtilisateurDAPost } from "../../DA";
 import { IPostUser } from "../../types";
 import { v4 as uuidv4 } from "uuid";
 import { UtilisateurServiceGet } from "./utilisateurGet.service";
+import  bcrypt  from 'bcrypt'
 
 export class UtilisateurPostService {
 
@@ -10,7 +11,7 @@ export class UtilisateurPostService {
         private utilisateurServiceGet: UtilisateurServiceGet
     ){}
 
-    public async PostNewUserOnMongo(newUserWithoutId: IPostUser): Promise<IPostUser | void> {
+    public async PostNewUserOnMongo(newUserWithoutId: IPostUser): Promise<string | void> {
         try {
             const id: string =  uuidv4()
 
@@ -20,16 +21,17 @@ export class UtilisateurPostService {
                 return;
             }
 
-            const newUser = Object.assign({},newUserWithoutId,{ id: id })
+            let newUser = Object.assign({},newUserWithoutId,{ id: id })
 
             // hasher le mot de passe
-            
-
-
-            
-            const data = await this.utilisateurDAPost.PostUserOnMongo(newUser);
+            bcrypt.genSalt(10,(err,salt) => {
+                bcrypt.hash(newUser.password,salt, async (err,hash) => {
+                    newUser.password = hash
+                    await this.utilisateurDAPost.PostUserOnMongo(newUser);
+                })
+            })
     
-            return data;
+            return newUser.id;
         } catch (error) {
             console.error("Error during user creation:");
             throw error

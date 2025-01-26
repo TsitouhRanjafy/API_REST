@@ -7,9 +7,13 @@ export const  UtilisateurRouterPost = (router: Router, service: UtilisateurPostS
     router.post( '/new/user/m',async (req: Request, res: Response) => {
         const userWthioudId = req.body;
         try {
-            const data = await service.PostNewUserOnMongo(userWthioudId);
-            if (data){
-                res.status(StatusCodes.CREATED).send(data);
+            const id: string | void = await service.PostNewUserOnMongo(userWthioudId);
+            if (id){
+                res.status(StatusCodes.CREATED).send({
+                    "status": ReasonPhrases.CREATED,
+                    "message": "signup done",
+                    "your_id": id
+                });
             } else {
                 res.status(StatusCodes.NOT_ACCEPTABLE).send({ 
                     "status": ReasonPhrases.NOT_ACCEPTABLE, 
