@@ -8,7 +8,8 @@ interface IUser extends Document {
     password: string;
 }
 
-export interface IPutUser {
+export interface IPostUser {
+    id?: string,
     firstname: string;
     lastname: string;
     email: string;

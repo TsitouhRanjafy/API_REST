@@ -12,6 +12,7 @@ import { CacheDataDASet } from "./Access/cache/cacheDA.Set";
 import { CacheDataDAGet } from "./Access/cache/cacheDA.Get";
 import { DACache } from "./Access/cache/cacheDA.delete";
 import { EmpruntDADelete } from "./Access/Emprunt/empruntDA.Delete";
+import { UtilisateurDAPost } from "./Access/Utilisateur/utilisateurPost.DA";
 
 
 export {
@@ -29,5 +30,6 @@ export {
     CacheDataDASet,
     CacheDataDAGet,
     DACache,
-    EmpruntDADelete
+    EmpruntDADelete,
+    UtilisateurDAPost
 }

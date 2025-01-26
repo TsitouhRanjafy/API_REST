@@ -17,6 +17,7 @@ import {
     CacheDataDAGet,
     DACache,
     EmpruntDADelete,
+    UtilisateurDAPost,
 } from "./DA/index";
 import { 
     LivreRouterGet , 
@@ -29,6 +30,7 @@ import {
     LivreRouterPost,
     InitRouterGet,
     EmpruntRouterDelete,
+    UtilisateurRouterPost,
 } from "./routes/index";
 import { 
     AvisServicePost, 
@@ -41,8 +43,10 @@ import {
     LivreServicePost,
     CacheService,
     InitServiceGet,
-    EmpruntServiceDelete
+    EmpruntServiceDelete,
+    UtilisateurPostService
 } from "./service/index";
+import { throwDeprecation } from "process";
 
 dotenv.config()
 
@@ -61,26 +65,32 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use('/',router)
 
+InitRouterGet(router,new InitServiceGet(new CacheService(new CacheDataDASet,new CacheDataDAGet,new LivreDAGet,new DACache)));
+
 LivreRouterGet(router,new LivreServiceGet(new LivreDAGet,new CacheDataDASet,new CacheDataDAGet,new CacheService(new CacheDataDASet,new CacheDataDAGet,new LivreDAGet,new DACache)))
-UtilisateurRouterGet(router,new UtilisateurServiceGet(new UtilisateurDAGet))
-EmpruntRouterPost(router,new EmpruntServicePost(new EmpruntDAPost,new UtilisateurDAGet,new LivreDAGet,new LivreDAPut))
-AvisRouterPost(router,new AvisServicePost(new AvisDAPost))
 LivreRouterDelete(router,new LivreServiceDelete(new LivreDADelete,new CacheService(new CacheDataDASet,new CacheDataDAGet,new LivreDAGet,new DACache),new LivreDAGet))
-EmpruntRouterGet(router,new EmpruntServiceGet(new EmpruntDAGet));
 LivreRouterPut(router,new LivreServicePut(new LivreDAPut))
 LivreRouterPost(router,new LivreServicePost(new LivreDAPost,new CacheService(new CacheDataDASet,new CacheDataDAGet,new LivreDAGet,new DACache)));
-InitRouterGet(router,new InitServiceGet(new CacheService(new CacheDataDASet,new CacheDataDAGet,new LivreDAGet,new DACache)));
+
+UtilisateurRouterGet(router,new UtilisateurServiceGet(new UtilisateurDAGet))
+UtilisateurRouterPost(router,new UtilisateurPostService(new UtilisateurDAPost))
+
+EmpruntRouterPost(router,new EmpruntServicePost(new EmpruntDAPost,new UtilisateurDAGet,new LivreDAGet,new LivreDAPut))
+EmpruntRouterGet(router,new EmpruntServiceGet(new EmpruntDAGet));
 EmpruntRouterDelete(router,new EmpruntServiceDelete(new EmpruntDADelete,new LivreServicePut(new LivreDAPut),new EmpruntDAGet,new EmpruntDAPost));
+
+AvisRouterPost(router,new AvisServicePost(new AvisDAPost))
+
 
 app.listen(port, async () =>{
     const cacheService = new CacheService(new CacheDataDASet,new CacheDataDAGet,new LivreDAGet,new DACache);
     try{
-        console.log(`server running on port ${port}`);
+        console.log(`   \n server running on port ${port} \n`);
         syncDatabaseMysql();
         connectMongo();    
         await cacheService.CacheNombreToutLivre("nombreToutLivre");
     } catch(error){
-        console.error(error);
+        throw error
     } 
 })
 

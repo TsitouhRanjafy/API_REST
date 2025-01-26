@@ -9,7 +9,7 @@ import { LivreServicePost } from "./livre/livrePost.service";
 import { CacheService } from "./cache/cache.service"; 
 import { InitServiceGet } from "./init/initGet.service";
 import { EmpruntServiceDelete } from "./emprunt/empruntDelete.service";
-
+import { UtilisateurPostService } from "./utilisateur/utilisateurPost.service";
 
 export {
     LivreServiceGet,
@@ -23,4 +23,5 @@ export {
     CacheService,
     InitServiceGet,
     EmpruntServiceDelete,
+    UtilisateurPostService
 }
