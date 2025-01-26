@@ -4,7 +4,7 @@ import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
 export const  UtilisateurRouterGet = (router: Router, service: UtilisateurServiceGet) =>{
 
-    router.get('/users', async (req: Request, res: Response) => {
+    router.get('/users/', async (req: Request, res: Response) => {
         try {
             const data = await service.GetUtilisateurs();
             res.status(StatusCodes.OK).send(data);

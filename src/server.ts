@@ -73,7 +73,7 @@ LivreRouterPut(router,new LivreServicePut(new LivreDAPut))
 LivreRouterPost(router,new LivreServicePost(new LivreDAPost,new CacheService(new CacheDataDASet,new CacheDataDAGet,new LivreDAGet,new DACache)));
 
 UtilisateurRouterGet(router,new UtilisateurServiceGet(new UtilisateurDAGet))
-UtilisateurRouterPost(router,new UtilisateurPostService(new UtilisateurDAPost))
+UtilisateurRouterPost(router,new UtilisateurPostService(new UtilisateurDAPost,new UtilisateurServiceGet(new UtilisateurDAGet)))
 
 EmpruntRouterPost(router,new EmpruntServicePost(new EmpruntDAPost,new UtilisateurDAGet,new LivreDAGet,new LivreDAPut))
 EmpruntRouterGet(router,new EmpruntServiceGet(new EmpruntDAGet));

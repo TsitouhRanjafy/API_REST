@@ -1,4 +1,4 @@
-import { Utilisateur } from "../../../types/index";
+import { UserMongoose, Utilisateur } from "../../../types/index";
 import { DBManager } from "../../DBManager";
 
 
@@ -23,6 +23,15 @@ export class UtilisateurDAGet extends DBManager {
         try {
             const data = await this.ReadData(deferredQuery);
             return data;
+        } catch (error) {
+            throw error
+        }
+    }
+
+    public async IsUserAvailable(email: string): Promise<boolean> {
+        try {
+            const data = await UserMongoose.findOne({ email: email }).exec(); // null if not found
+            return data? true : false 
         } catch (error) {
             throw error
         }

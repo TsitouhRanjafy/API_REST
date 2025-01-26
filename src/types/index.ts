@@ -25,5 +25,5 @@ export {
     EmpruntHistorique,
     IEmpruntHistoriques,
     IPostUser,
-    UserMongoose
+    UserMongoose,
 }

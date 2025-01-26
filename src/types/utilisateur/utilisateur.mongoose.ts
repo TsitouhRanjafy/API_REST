@@ -33,13 +33,14 @@ const UserSchema = new Schema<IUser>({
     email: {
         type: String,
         required: true,
+        unique: true
     },
     password: {
         type: String,
         required: true,
-        unique: true
+        unique: false
     }
 })
 
-export const UserMongoose = model<IUser>('utilisateur',UserSchema); 
+export const UserMongoose = model<IUser>('utilisateurs',UserSchema); 
 

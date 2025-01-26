@@ -24,4 +24,14 @@ export class UtilisateurServiceGet {
             console.error(" Erro Service Utilisateur Get ",error)
         }
     }
+
+    public async IsUserAvailable(emailUser:string): Promise<boolean>{
+        try {
+            const isAvailable: boolean = await this.utilisateurDAGet.IsUserAvailable(emailUser);
+            return isAvailable;
+        } catch (error) {
+            throw error
+        }
+    }
+
 }
