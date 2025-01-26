@@ -1,6 +1,7 @@
 import express,{ Application , Request, Response, NextFunction} from "express";
 import dotenv from 'dotenv';
 import cors from 'cors';
+import cookieParser from "cookie-parser";
 
 import { 
     EmpruntDAPost, 
@@ -63,6 +64,7 @@ app.use(cors({
 }));
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+app.use(cookieParser());
 app.use('/',router)
 
 InitRouterGet(router,new InitServiceGet(new CacheService(new CacheDataDASet,new CacheDataDAGet,new LivreDAGet,new DACache)));

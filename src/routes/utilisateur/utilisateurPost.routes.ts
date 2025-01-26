@@ -1,6 +1,7 @@
 import  { Router, Request, Response  } from "express"
 import { UtilisateurPostService } from "../../service"
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import { JwtPayload } from "jsonwebtoken";
 
 export const  UtilisateurRouterPost = (router: Router, service: UtilisateurPostService) =>{
 
@@ -38,12 +39,27 @@ export const  UtilisateurRouterPost = (router: Router, service: UtilisateurPostS
                 res.status(StatusCodes.BAD_REQUEST).send({ "status ": ReasonPhrases.BAD_REQUEST });
                 return;
             }
-            res.cookie("token",data, { maxAge: 5 * 1000 });
+            res.cookie("token",data, { maxAge: 24 * (60 * (60 * 1000)) }); // 24h
             res.status(StatusCodes.OK).send({ "status": ReasonPhrases.OK, "token": data });
         } catch (error) {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
                 "status": ReasonPhrases.INTERNAL_SERVER_ERROR,
             });
+            throw error
+        }
+    })
+
+    // authentification 
+    router.post('/welcome',async (req: Request, res: Response) => {
+        try {
+            const token = req.cookies.token; // key of token (perso: 'token')
+            const isVerified: JwtPayload | string | void = await service.Welcome(token)
+            if (isVerified){
+                res.status(StatusCodes.OK).send({ "status": ReasonPhrases.OK, "message": isVerified });
+                return;
+            }
+            res.status(StatusCodes.NOT_FOUND).send({ "status": ReasonPhrases.NOT_FOUND })
+        } catch (error) {
             throw error
         }
     })

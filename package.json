@@ -21,6 +21,7 @@
     "@types/node": "^22.9.0",
     "@types/yup": "^0.29.14",
     "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
@@ -39,6 +40,7 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.8",
     "sequelize": "^6.37.5"
   }
 }

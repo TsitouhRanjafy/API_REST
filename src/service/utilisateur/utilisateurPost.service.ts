@@ -3,7 +3,7 @@ import { IPostUser } from "../../types";
 import { v4 as uuidv4 } from "uuid";
 import { UtilisateurServiceGet } from "./utilisateurGet.service";
 import  bcrypt  from 'bcrypt'
-import  jwt  from "jsonwebtoken";
+import  jwt, { JwtPayload }  from "jsonwebtoken";
 
 export class UtilisateurPostService {
 
@@ -39,43 +39,60 @@ export class UtilisateurPostService {
         }
     }
 
+    
     public async SignIn(email: string,password: string): Promise<string | void >{
 
         try {
             //  Vérifier si l'email exist 
             const isUserExist: IPostUser | null = await this.utilisateurServiceGet.IsUserAvailable(email);
             if (!isUserExist) {
-                console.log('user not found');
-                
-                return
+               return
             };
 
             // Vérifion le mot de passe
             const isPasswordMatched = await bcrypt.compare(password,isUserExist.password);
             if (!isPasswordMatched) {
-                console.log('wrong password');
-                
                 return;
             };
 
             if (!process.env.JWT_KEY) {
-                console.log('jwt key not found');
-                
                 return;
             };
             const token = jwt.sign(
                 { id: isUserExist.id, email: isUserExist.email, password: isUserExist.password },
                 process.env.JWT_KEY,
                 {
-                    expiresIn: 10
+                    expiresIn: (24 * (60 *(60 * 1000))) + 15
                 }
             )
-
             return token;
         } catch (error) {
             throw error
         }
+    }
 
-
+    public async Welcome(Token: string): Promise<string | JwtPayload | void > {
+        try {
+            const token = Token;
+            if (!token) return;
+            if (!process.env.JWT_KEY) {
+                console.log('jwt key not found');
+                return;
+            };
+            // Analysez la chaîne JWT et stockez le résultat dans `payload`.
+            // Notez que nous transmettons également la clé dans cette méthode. Cette méthode génèrera une erreur
+            // si le jeton n'est pas valide (s'il a expiré conformément au délai d'expiration que nous avons défini lors de la connexion),
+            // ou si la signature ne correspond pas
+            const payload = jwt.verify(token,process.env.JWT_KEY)   
+            return payload;
+        } catch (error) {
+            if (error instanceof jwt.JsonWebTokenError) {
+                // if the error thrown is because the JWT is unauthorized, return a 401 error
+                // mila gestion de retoure de http-code tsika
+                console.log(' ----- unauthorized JWT');
+                return;
+            }
+            throw error;
+        }
     }
 }
