@@ -1,4 +1,4 @@
-import { UserMongoose, Utilisateur } from "../../../types/index";
+import { IPostUser, UserMongoose, Utilisateur } from "../../../types/index";
 import { DBManager } from "../../DBManager";
 
 
@@ -28,12 +28,13 @@ export class UtilisateurDAGet extends DBManager {
         }
     }
 
-    public async IsUserAvailable(email: string): Promise<boolean> {
+    public async IsUserAvailableByEmail(email: string): Promise<IPostUser | null> {
         try {
-            const data = await UserMongoose.findOne({ email: email }).exec(); // null if not found
-            return data? true : false 
+            const data: IPostUser | null = await UserMongoose.findOne({ email: email }).exec(); // null if not found
+            return data;
         } catch (error) {
             throw error
         }
     }
+
 }

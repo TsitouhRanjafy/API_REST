@@ -1,4 +1,5 @@
 import { UtilisateurDAGet } from "../../DA/index";
+import { IPostUser } from "../../types";
 
 export class UtilisateurServiceGet {
     private utilisateurDAGet: UtilisateurDAGet;
@@ -25,9 +26,9 @@ export class UtilisateurServiceGet {
         }
     }
 
-    public async IsUserAvailable(emailUser:string): Promise<boolean>{
+    public async IsUserAvailable(emailUser:string): Promise<IPostUser | null>{
         try {
-            const isAvailable: boolean = await this.utilisateurDAGet.IsUserAvailable(emailUser);
+            const isAvailable: IPostUser | null = await this.utilisateurDAGet.IsUserAvailableByEmail(emailUser);
             return isAvailable;
         } catch (error) {
             throw error

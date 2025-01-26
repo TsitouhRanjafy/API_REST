@@ -4,10 +4,11 @@ import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
 export const  UtilisateurRouterPost = (router: Router, service: UtilisateurPostService) =>{
 
-    router.post( '/new/user/m',async (req: Request, res: Response) => {
+    // sign up
+    router.post( '/signup/',async (req: Request, res: Response) => {
         const userWthioudId = req.body;
         try {
-            const id: string | void = await service.PostNewUserOnMongo(userWthioudId);
+            const id: string | void = await service.SignUp(userWthioudId);
             if (id){
                 res.status(StatusCodes.CREATED).send({
                     "status": ReasonPhrases.CREATED,
@@ -21,8 +22,30 @@ export const  UtilisateurRouterPost = (router: Router, service: UtilisateurPostS
                 })
             }
         } catch (error) {
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR);
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
+                "status": ReasonPhrases.INTERNAL_SERVER_ERROR,
+            });
             throw error
         }
     })
+
+    // sign in 
+    router.post( '/sign/in',async (req: Request, res: Response) => {
+        const { email,password } = req.body;
+        try {
+            const data: string | void  = await service.SignIn(email,password);
+            if (!data) { 
+                res.status(StatusCodes.BAD_REQUEST).send({ "status ": ReasonPhrases.BAD_REQUEST });
+                return;
+            }
+            res.cookie("token",data, { maxAge: 5 * 1000 });
+            res.status(StatusCodes.OK).send({ "status": ReasonPhrases.OK, "token": data });
+        } catch (error) {
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
+                "status": ReasonPhrases.INTERNAL_SERVER_ERROR,
+            });
+            throw error
+        }
+    })
+
 }
