@@ -1,7 +1,7 @@
 import { UtilisateurDAPost } from "../../DA";
 import { IPostUser, loginObject } from "../../types";
 import { v4 as uuidv4 } from "uuid";
-import { UtilisateurServiceGet } from "./utilisateurGet.service";
+import { UtilisateurServiceGet } from "./utilisateurGet-badged.service";
 import  bcrypt  from 'bcrypt'
 import  jwt, { JwtPayload }  from "jsonwebtoken";
 
@@ -78,8 +78,8 @@ export class UtilisateurPostService {
         try {
             const token = Token;
             if (!token) return;
-            if (!process.env.JWT_KEY) {
-                console.log('jwt key not found');
+            if (!process.env.JWT_KEY) {;
+                // jwt .env non trouvé
                 return;
             };
             // Analysez la chaîne JWT et stockez le résultat dans `payload`.
@@ -92,7 +92,6 @@ export class UtilisateurPostService {
             if (error instanceof jwt.JsonWebTokenError) {
                 // if the error thrown is because the JWT is unauthorized, return a 401 error
                 // mila gestion de retoure de http-code tsika
-                console.log(' ----- unauthorized JWT');
                 return;
             }
             throw error;

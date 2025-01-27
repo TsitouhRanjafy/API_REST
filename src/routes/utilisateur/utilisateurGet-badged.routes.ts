@@ -4,7 +4,8 @@ import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
 export const  UtilisateurRouterGet = (router: Router, service: UtilisateurServiceGet) =>{
 
-    router.get('/users/', async (req: Request, res: Response) => {
+    // tout l'utilisateur qui autorise à emprunter de livres
+    router.get('/users/badged', async (req: Request, res: Response) => {
         try {
             const data = await service.GetUtilisateurs();
             res.status(StatusCodes.OK).send(data);
@@ -16,7 +17,8 @@ export const  UtilisateurRouterGet = (router: Router, service: UtilisateurServic
         }
     })
 
-    router.get('/user/:id', async (req: Request, res: Response) => {
+    // 
+    router.get('/user/badged/:id', async (req: Request, res: Response) => {
         const { id: id_utilisateur } = req.params;
         try {
             const data = await service.GetUtilisateurById(id_utilisateur)

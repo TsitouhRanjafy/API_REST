@@ -4,6 +4,7 @@ import { DBManager } from "../../DBManager";
 
 export class UtilisateurDAGet extends DBManager {
 
+    
     public async GetUtilisateurs() {
         const deferredQuery = (): Promise<any> => {
             return Utilisateur.findAll();
@@ -36,5 +37,7 @@ export class UtilisateurDAGet extends DBManager {
             throw error
         }
     }
+
+
 
 }

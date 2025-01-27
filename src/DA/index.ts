@@ -1,7 +1,7 @@
 import { connectMongo } from "./DBConnection/DBConnect.mongo";
 import { syncDatabaseMysql , sequelize } from "./DBConnection/DBSync.mysql";
 import { LivreDAGet } from "./Access/Livre/LivreDA.Get";
-import { UtilisateurDAGet } from "./Access/Utilisateur/utilisateurDA.Get";
+import { UtilisateurDAGet } from "./Access/Utilisateur/utilisateurDA-badged.Get";
 import { EmpruntDAPost } from "./Access/Emprunt/empruntDA.Post";
 import { AvisDAPost } from "./Access/Avis/avisDA.Post";
 import { LivreDADelete } from "./Access/Livre/LivreDA.Delete";

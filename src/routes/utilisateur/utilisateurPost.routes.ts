@@ -15,7 +15,7 @@ export const  UtilisateurRouterPost = (router: Router, service: UtilisateurPostS
                 res.status(StatusCodes.CREATED).send({
                     "status": ReasonPhrases.CREATED,
                     "message": "signup done",
-                    "your_id": id
+                    "id": id
                 });
             } else {
                 res.status(StatusCodes.NOT_ACCEPTABLE).send({ 
@@ -44,7 +44,11 @@ export const  UtilisateurRouterPost = (router: Router, service: UtilisateurPostS
                 res.status(StatusCodes.BAD_REQUEST).send({ "status ": ReasonPhrases.BAD_REQUEST });
                 return;
             }
-            res.cookie("token",data.token, { maxAge: 24 * (60 * (60 * 1000)) }); // 24h
+            res.cookie("token",data.token, { 
+                // httpOnly: true, // Accéssible uniquement avec http
+                maxAge: 24 * (60 * (60 * 1000)) // 24h
+            }); 
+            
             res.status(StatusCodes.OK).send({ 
                 "status": ReasonPhrases.OK,
                 "id": data.id,
@@ -62,7 +66,6 @@ export const  UtilisateurRouterPost = (router: Router, service: UtilisateurPostS
     router.post('/welcome',async (req: Request, res: Response) => {
         try {
             const token = req.cookies.token; // key of token (perso: 'token')
-            console.log(token);
             
             const isVerified: JwtPayload | string | void = await service.Welcome(token)
             if (isVerified){

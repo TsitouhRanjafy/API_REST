@@ -1,5 +1,5 @@
 import { LivreRouterGet } from "./livre/livreGet.routes";
-import { UtilisateurRouterGet } from "./utilisateur/utilisateurGet.routes";
+import { UtilisateurRouterGet } from "./utilisateur/utilisateurGet-badged.routes";
 import { EmpruntRouterPost } from "./emprunt/empruntPost.routes";
 import { AvisRouterPost } from "./avis/avisPost.routes";
 import { LivreRouterDelete } from "./livre/livreDelete.routes";
