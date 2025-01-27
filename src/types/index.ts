@@ -7,7 +7,7 @@ import { triEmprunt, IEmprunt } from "./emprunt/type";
 import { ILivre } from "./livre/type";
 import { triMethodeLivre } from "./livre/type";
 import { EmpruntHistorique , IEmpruntHistoriques } from "./emprunt/empruntHistorique.type";
-import { IPostUser, UserMongoose, loginObject } from "./utilisateur/utilisateur.mongoose";
+import { IPostUser, UserMongoose, loginObject, typeForGetUser } from "./utilisateur/utilisateur.mongoose";
 
 
 export {
@@ -27,5 +27,6 @@ export {
     IEmpruntHistoriques,
     IPostUser,
     UserMongoose,
-    loginObject
+    loginObject,
+    typeForGetUser
 }

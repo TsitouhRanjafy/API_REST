@@ -49,3 +49,10 @@ export type loginObject = {
     token: string,
 }
 
+export type typeForGetUser = {
+    id: string,
+    firstname: string,
+    lastname: string,
+    email: string,
+}
+

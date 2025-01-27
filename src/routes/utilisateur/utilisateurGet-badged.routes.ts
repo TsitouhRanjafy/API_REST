@@ -2,7 +2,7 @@ import { Router, Request, Response } from "express";
 import { UtilisateurServiceGet } from "../../service/index";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
-export const  UtilisateurRouterGet = (router: Router, service: UtilisateurServiceGet) =>{
+export const  UtilisateurBadgedRouterGet = (router: Router, service: UtilisateurServiceGet) =>{
 
     // tout l'utilisateur qui autorise à emprunter de livres
     router.get('/users/badged', async (req: Request, res: Response) => {

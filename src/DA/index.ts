@@ -1,7 +1,7 @@
 import { connectMongo } from "./DBConnection/DBConnect.mongo";
 import { syncDatabaseMysql , sequelize } from "./DBConnection/DBSync.mysql";
 import { LivreDAGet } from "./Access/Livre/LivreDA.Get";
-import { UtilisateurDAGet } from "./Access/Utilisateur/utilisateurDA-badged.Get";
+import { UtilisateurBadgedDAGet } from "./Access/Utilisateur/utilisateurDA-badged.Get";
 import { EmpruntDAPost } from "./Access/Emprunt/empruntDA.Post";
 import { AvisDAPost } from "./Access/Avis/avisDA.Post";
 import { LivreDADelete } from "./Access/Livre/LivreDA.Delete";
@@ -13,6 +13,7 @@ import { CacheDataDAGet } from "./Access/cache/cacheDA.Get";
 import { DACache } from "./Access/cache/cacheDA.delete";
 import { EmpruntDADelete } from "./Access/Emprunt/empruntDA.Delete";
 import { UtilisateurDAPost } from "./Access/Utilisateur/utilisateurPost.DA";
+import { UtilisateurDAGet } from "./Access/Utilisateur/utilisateurGet.DA";
 
 
 export {
@@ -20,7 +21,7 @@ export {
     syncDatabaseMysql,
     sequelize,
     LivreDAGet,
-    UtilisateurDAGet,
+    UtilisateurBadgedDAGet,
     EmpruntDAPost,
     AvisDAPost,
     LivreDADelete,
@@ -31,5 +32,6 @@ export {
     CacheDataDAGet,
     DACache,
     EmpruntDADelete,
-    UtilisateurDAPost
+    UtilisateurDAPost,
+    UtilisateurDAGet
 }

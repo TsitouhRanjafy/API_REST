@@ -1,10 +1,10 @@
-import { UtilisateurDAGet } from "../../DA/index";
+import { UtilisateurBadgedDAGet } from "../../DA/index";
 import { IPostUser } from "../../types";
 
 export class UtilisateurServiceGet {
-    private utilisateurDAGet: UtilisateurDAGet;
+    private utilisateurDAGet: UtilisateurBadgedDAGet;
 
-    constructor(utilisateurDAGet: UtilisateurDAGet){
+    constructor(utilisateurDAGet: UtilisateurBadgedDAGet){
         this.utilisateurDAGet = utilisateurDAGet;
     }
 

@@ -1,5 +1,5 @@
 import { LivreRouterGet } from "./livre/livreGet.routes";
-import { UtilisateurRouterGet } from "./utilisateur/utilisateurGet-badged.routes";
+import { UtilisateurBadgedRouterGet } from "./utilisateur/utilisateurGet-badged.routes";
 import { EmpruntRouterPost } from "./emprunt/empruntPost.routes";
 import { AvisRouterPost } from "./avis/avisPost.routes";
 import { LivreRouterDelete } from "./livre/livreDelete.routes";
@@ -9,10 +9,11 @@ import { LivreRouterPost } from "./livre/livrePost.routes";
 import { InitRouterGet } from "./init/initGet.routes";
 import { EmpruntRouterDelete } from "./emprunt/empruntDelete.routes";
 import { UtilisateurRouterPost } from "./utilisateur/utilisateurPost.routes";
+import { UtilisateurRouteGet } from "./utilisateur/utilisateurGet.routes";
 
 export {
     LivreRouterGet,
-    UtilisateurRouterGet,
+    UtilisateurBadgedRouterGet,
     EmpruntRouterPost,
     AvisRouterPost,
     LivreRouterDelete,
@@ -21,5 +22,6 @@ export {
     LivreRouterPost,
     InitRouterGet,
     EmpruntRouterDelete,
-    UtilisateurRouterPost
+    UtilisateurRouterPost,
+    UtilisateurRouteGet
 }

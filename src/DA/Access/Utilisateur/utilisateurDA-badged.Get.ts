@@ -1,8 +1,8 @@
 import { IPostUser, UserMongoose, Utilisateur } from "../../../types/index";
 import { DBManager } from "../../DBManager";
 
-
-export class UtilisateurDAGet extends DBManager {
+// Data Accès pour l'utilisateur qui peut emprunter des livres (qui a déjà des badge)
+export class UtilisateurBadgedDAGet extends DBManager {
 
     
     public async GetUtilisateurs() {

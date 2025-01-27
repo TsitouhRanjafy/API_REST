@@ -1,4 +1,4 @@
-import { EmpruntDAPost , UtilisateurDAGet , LivreDAGet, LivreDAPut } from "../../DA"
+import { EmpruntDAPost , UtilisateurDAGet , LivreDAGet, LivreDAPut, UtilisateurBadgedDAGet } from "../../DA"
 import { IEmprunt, EmpruntCreationOptional, Emprunt } from "../../types/index";
 import { v4 as uuidv4 } from "uuid";
 
@@ -6,7 +6,7 @@ export class EmpruntServicePost {
 
     constructor(
         private empruntDAPost : EmpruntDAPost,
-        private utilisateurDAGet: UtilisateurDAGet,
+        private utilisateurDAGet: UtilisateurBadgedDAGet,
         private livreDAGet: LivreDAGet,
         private livreDAPut: LivreDAPut
     ){}

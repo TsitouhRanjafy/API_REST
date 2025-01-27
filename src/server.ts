@@ -7,7 +7,7 @@ import {
     EmpruntDAPost, 
     LivreDAGet, 
     syncDatabaseMysql, 
-    UtilisateurDAGet , 
+    UtilisateurBadgedDAGet , 
     connectMongo, 
     AvisDAPost,
     LivreDADelete,
@@ -19,10 +19,11 @@ import {
     DACache,
     EmpruntDADelete,
     UtilisateurDAPost,
+    UtilisateurDAGet,
 } from "./DA/index";
 import { 
     LivreRouterGet , 
-    UtilisateurRouterGet , 
+    UtilisateurBadgedRouterGet , 
     EmpruntRouterPost , 
     AvisRouterPost,
     LivreRouterDelete,
@@ -32,6 +33,7 @@ import {
     InitRouterGet,
     EmpruntRouterDelete,
     UtilisateurRouterPost,
+    UtilisateurRouteGet,
 } from "./routes/index";
 import { 
     AvisServicePost, 
@@ -45,7 +47,8 @@ import {
     CacheService,
     InitServiceGet,
     EmpruntServiceDelete,
-    UtilisateurPostService
+    UtilisateurPostService,
+    UtilisateurGetService
 } from "./service/index";
 import { throwDeprecation } from "process";
 
@@ -74,10 +77,11 @@ LivreRouterDelete(router,new LivreServiceDelete(new LivreDADelete,new CacheServi
 LivreRouterPut(router,new LivreServicePut(new LivreDAPut))
 LivreRouterPost(router,new LivreServicePost(new LivreDAPost,new CacheService(new CacheDataDASet,new CacheDataDAGet,new LivreDAGet,new DACache)));
 
-UtilisateurRouterGet(router,new UtilisateurServiceGet(new UtilisateurDAGet))
-UtilisateurRouterPost(router,new UtilisateurPostService(new UtilisateurDAPost,new UtilisateurServiceGet(new UtilisateurDAGet)))
+UtilisateurBadgedRouterGet(router,new UtilisateurServiceGet(new UtilisateurBadgedDAGet))
+UtilisateurRouterPost(router,new UtilisateurPostService(new UtilisateurDAPost,new UtilisateurServiceGet(new UtilisateurBadgedDAGet)))
+UtilisateurRouteGet(router,new UtilisateurGetService(new UtilisateurDAGet));
 
-EmpruntRouterPost(router,new EmpruntServicePost(new EmpruntDAPost,new UtilisateurDAGet,new LivreDAGet,new LivreDAPut))
+EmpruntRouterPost(router,new EmpruntServicePost(new EmpruntDAPost,new UtilisateurBadgedDAGet,new LivreDAGet,new LivreDAPut))
 EmpruntRouterGet(router,new EmpruntServiceGet(new EmpruntDAGet));
 EmpruntRouterDelete(router,new EmpruntServiceDelete(new EmpruntDADelete,new LivreServicePut(new LivreDAPut),new EmpruntDAGet,new EmpruntDAPost));
 
