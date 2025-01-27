@@ -70,7 +70,6 @@ export class UtilisateurPostService {
 
             return Object.assign({},{ id: isUserExist.id? isUserExist.id : null }, { token: token });
         } catch (error) {
-            return;
             throw error
         }
     }
