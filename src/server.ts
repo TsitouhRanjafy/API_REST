@@ -60,7 +60,7 @@ app.use(cors({
     origin: process.env.DOMAIN_ORIGIN,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Access-Control-Allow-Origin', process.env.DOMAIN_ORIGIN || 'http://localhost:4200']
+    allowedHeaders: [ 'Content-type','Authorization' ]
 }));
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))

@@ -2,6 +2,7 @@ import  { Router, Request, Response  } from "express"
 import { UtilisateurPostService } from "../../service"
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { JwtPayload } from "jsonwebtoken";
+import { loginObject } from "../../types";
 
 export const  UtilisateurRouterPost = (router: Router, service: UtilisateurPostService) =>{
 
@@ -34,13 +35,21 @@ export const  UtilisateurRouterPost = (router: Router, service: UtilisateurPostS
     router.post( '/sign/in',async (req: Request, res: Response) => {
         const { email,password } = req.body;
         try {
-            const data: string | void  = await service.SignIn(email,password);
+            const data: loginObject | void  = await service.SignIn(email,password);
             if (!data) { 
                 res.status(StatusCodes.BAD_REQUEST).send({ "status ": ReasonPhrases.BAD_REQUEST });
                 return;
             }
+            if (!data.id){
+                res.status(StatusCodes.BAD_REQUEST).send({ "status ": ReasonPhrases.BAD_REQUEST });
+                return;
+            }
             res.cookie("token",data, { maxAge: 24 * (60 * (60 * 1000)) }); // 24h
-            res.status(StatusCodes.OK).send({ "status": ReasonPhrases.OK, "token": data });
+            res.status(StatusCodes.OK).send({ 
+                "status": ReasonPhrases.OK,
+                "id": data.id,
+                "token": data.token
+            });
         } catch (error) {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
                 "status": ReasonPhrases.INTERNAL_SERVER_ERROR,

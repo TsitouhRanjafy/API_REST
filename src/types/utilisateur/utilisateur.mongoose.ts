@@ -44,3 +44,8 @@ const UserSchema = new Schema<IUser>({
 
 export const UserMongoose = model<IUser>('utilisateurs',UserSchema); 
 
+export type loginObject = {
+    id: string | null,
+    token: string,
+}
+

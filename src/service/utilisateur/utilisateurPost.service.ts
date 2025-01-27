@@ -1,5 +1,5 @@
 import { UtilisateurDAPost } from "../../DA";
-import { IPostUser } from "../../types";
+import { IPostUser, loginObject } from "../../types";
 import { v4 as uuidv4 } from "uuid";
 import { UtilisateurServiceGet } from "./utilisateurGet.service";
 import  bcrypt  from 'bcrypt'
@@ -40,7 +40,7 @@ export class UtilisateurPostService {
     }
 
     
-    public async SignIn(email: string,password: string): Promise<string | void >{
+    public async SignIn(email: string,password: string): Promise<loginObject | void >{
 
         try {
             //  Vérifier si l'email exist 
@@ -58,6 +58,8 @@ export class UtilisateurPostService {
             if (!process.env.JWT_KEY) {
                 return;
             };
+
+            // verifion le token
             const token = jwt.sign(
                 { id: isUserExist.id, email: isUserExist.email, password: isUserExist.password },
                 process.env.JWT_KEY,
@@ -65,8 +67,10 @@ export class UtilisateurPostService {
                     expiresIn: (24 * (60 *(60 * 1000))) + 15
                 }
             )
-            return token;
+
+            return Object.assign({},{ id: isUserExist.id? isUserExist.id : null }, { token: token });
         } catch (error) {
+            return;
             throw error
         }
     }
