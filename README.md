@@ -40,7 +40,7 @@ sudo service redis-cli start
 
 Clonez le repos
 ```bash
-  git clone 
+  git clone https://github.com/TsitouhRanjafy/API_REST.git
 ```
 Entrer dans notre dépot local et installé les dépendances
 ```bash
