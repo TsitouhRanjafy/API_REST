@@ -8,9 +8,9 @@ export const  UtilisateurRouterPost = (router: Router, service: UtilisateurPostS
 
     // sign up
     router.post( '/signup/',async (req: Request, res: Response) => {
-        const userWthioudId = req.body;
+        const userWithoutdId = req.body;
         try {
-            const id: string | void = await service.SignUp(userWthioudId);
+            const id: string | void = await service.SignUp(userWithoutdId);
             if (id){
                 res.status(StatusCodes.CREATED).send({
                     "status": ReasonPhrases.CREATED,
@@ -45,7 +45,7 @@ export const  UtilisateurRouterPost = (router: Router, service: UtilisateurPostS
                 return;
             }
             res.cookie("token",data.token, { 
-                // httpOnly: true, // Accéssible uniquement avec http
+                httpOnly: true, // Accéssible uniquement avec http
                 maxAge: 24 * (60 * (60 * 1000)) // 24h
             }); 
             

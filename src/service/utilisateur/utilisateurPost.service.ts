@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { UtilisateurServiceGet } from "./utilisateurGet-badged.service";
 import  bcrypt  from 'bcrypt'
 import  jwt, { JwtPayload }  from "jsonwebtoken";
+import { comparePassword, hashPassword } from "../../utils";
 
 export class UtilisateurPostService {
 
@@ -22,14 +23,16 @@ export class UtilisateurPostService {
                 return;
             }
 
-            let newUser = Object.assign({},newUserWithoutId,{ id: id })
+            let newUser: IPostUser = Object.assign({},newUserWithoutId,{ id: id })
 
             // hasher le mot de passe
-            bcrypt.genSalt(10,(err,salt) => {
-                bcrypt.hash(newUser.password,salt, async (err,hash) => {
-                    newUser.password = hash
-                    await this.utilisateurDAPost.PostUserOnMongo(newUser);
-                })
+            const passwordHashed: string = await hashPassword(newUser.password)
+            await this.utilisateurDAPost.PostUserOnMongo({
+                id: newUser.id,
+                firstname: newUser.firstname,
+                lastname: newUser.lastname,
+                email: newUser.email,
+                password: passwordHashed
             })
     
             return newUser.id;
@@ -38,7 +41,6 @@ export class UtilisateurPostService {
             throw error
         }
     }
-
     
     public async SignIn(email: string,password: string): Promise<loginObject | void >{
 
@@ -48,9 +50,10 @@ export class UtilisateurPostService {
             if (!isUserExist) {
                return
             };
+            
 
             // Vérifion le mot de passe
-            const isPasswordMatched = await bcrypt.compare(password,isUserExist.password);
+            const isPasswordMatched = await comparePassword(password,isUserExist.password);
             if (!isPasswordMatched) {
                 return;
             };
