@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { UtilisateurServiceGet } from "./utilisateurGet-badged.service";
 import  bcrypt  from 'bcrypt'
 import  jwt, { JwtPayload }  from "jsonwebtoken";
-import { comparePassword, hashPassword } from "../../utils";
+import { comparePassword, generateToken, hashPassword } from "../../utils";
 
 export class UtilisateurPostService {
 
@@ -62,14 +62,13 @@ export class UtilisateurPostService {
                 return;
             };
 
-            // verifion le token
-            const token = jwt.sign(
-                { id: isUserExist.id, email: isUserExist.email, password: isUserExist.password },
-                process.env.JWT_KEY,
-                {
-                    expiresIn: (24 * (60 *(60 * 1000))) + 15
-                }
-            )
+            // generer un token
+            const token = generateToken({
+                firstname: isUserExist.firstname,
+                lastname: isUserExist.lastname,
+                email: isUserExist.email,
+                password: isUserExist.password
+            },process.env.JWT_KEY)
 
             return Object.assign({},{ id: isUserExist.id? isUserExist.id : null }, { token: token });
         } catch (error) {

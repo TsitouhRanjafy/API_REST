@@ -1,4 +1,4 @@
-import { UserMongoose } from "../../../types";
+import { IUser, UserMongoose } from "../../../types";
 
 // Data Accès pour l'utilisateur qui n'est pas encore autorisé à emprunter des livres
 export class UtilisateurDAGet {
@@ -20,4 +20,15 @@ export class UtilisateurDAGet {
             throw error
         }
     }
+
+    public async getUserByEmail(email: string): Promise<IUser | null> {
+        try {
+            const data = await UserMongoose.findOne({ email: email }).exec(); // null if not found
+            return data;
+        } catch (error) {
+            throw error
+        }
+    }
+    
+
 }

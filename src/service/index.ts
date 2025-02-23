@@ -11,6 +11,8 @@ import { InitServiceGet } from "./init/initGet.service";
 import { EmpruntServiceDelete } from "./emprunt/empruntDelete.service";
 import { UtilisateurPostService } from "./utilisateur/utilisateurPost.service";
 import { UtilisateurGetService } from "./utilisateur/utilisateurGet.service";
+import { UtilisateurPutService } from "./utilisateur/utilisateurPut.service";
+import { OTPService } from "./temp/otp.service";
 
 export {
     LivreServiceGet,
@@ -25,5 +27,7 @@ export {
     InitServiceGet,
     EmpruntServiceDelete,
     UtilisateurPostService,
-    UtilisateurGetService
+    UtilisateurGetService,
+    UtilisateurPutService,
+    OTPService
 }

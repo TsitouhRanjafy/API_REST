@@ -10,6 +10,8 @@ import { InitRouterGet } from "./init/initGet.routes";
 import { EmpruntRouterDelete } from "./emprunt/empruntDelete.routes";
 import { UtilisateurRouterPost } from "./utilisateur/utilisateurPost.routes";
 import { UtilisateurRouteGet } from "./utilisateur/utilisateurGet.routes";
+import { UtilisateurRoutePut } from "./utilisateur/utilisateurPut.routes";
+import { OTPRoutes } from "./temp/otp.route";
 
 export {
     LivreRouterGet,
@@ -23,5 +25,7 @@ export {
     InitRouterGet,
     EmpruntRouterDelete,
     UtilisateurRouterPost,
-    UtilisateurRouteGet
+    UtilisateurRouteGet,
+    UtilisateurRoutePut,
+    OTPRoutes
 }

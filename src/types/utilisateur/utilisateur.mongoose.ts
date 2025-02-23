@@ -1,6 +1,6 @@
 import { Document, Schema, model } from "mongoose";
 
-interface IUser extends Document {
+interface IUsers extends Document {
     id: string;
     firstname: string;
     lastname: string;
@@ -16,7 +16,15 @@ export interface IPostUser {
     password: string;
 }
 
-const UserSchema = new Schema<IUser>({
+export interface IUser {
+    id: string;
+    firstname: string;
+    lastname: string;
+    email: string;
+    password: string;
+}
+
+const UserSchema = new Schema<IUsers>({
     id: {
         type: String,
         required: true,
@@ -42,7 +50,7 @@ const UserSchema = new Schema<IUser>({
     }
 })
 
-export const UserMongoose = model<IUser>('utilisateurs',UserSchema); 
+export const UserMongoose = model<IUsers>('utilisateurs',UserSchema); 
 
 export type loginObject = {
     id: string | null,

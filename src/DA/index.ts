@@ -14,6 +14,8 @@ import { DACache } from "./Access/cache/cacheDA.delete";
 import { EmpruntDADelete } from "./Access/Emprunt/empruntDA.Delete";
 import { UtilisateurDAPost } from "./Access/Utilisateur/utilisateurPost.DA";
 import { UtilisateurDAGet } from "./Access/Utilisateur/utilisateurGet.DA";
+import { UtilisateurPutDataAccess } from "./Access/Utilisateur/utilisateurPut.DA";
+import { OTPDataAcces } from "./Access/temp/otpPost.DA";
 
 
 export {
@@ -33,5 +35,7 @@ export {
     DACache,
     EmpruntDADelete,
     UtilisateurDAPost,
-    UtilisateurDAGet
+    UtilisateurDAGet,
+    UtilisateurPutDataAccess,
+    OTPDataAcces
 }

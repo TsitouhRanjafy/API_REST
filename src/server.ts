@@ -20,6 +20,8 @@ import {
     EmpruntDADelete,
     UtilisateurDAPost,
     UtilisateurDAGet,
+    UtilisateurPutDataAccess,
+    OTPDataAcces,
 } from "./DA/index";
 import { 
     LivreRouterGet , 
@@ -34,6 +36,8 @@ import {
     EmpruntRouterDelete,
     UtilisateurRouterPost,
     UtilisateurRouteGet,
+    UtilisateurRoutePut,
+    OTPRoutes
 } from "./routes/index";
 import { 
     AvisServicePost, 
@@ -48,9 +52,11 @@ import {
     InitServiceGet,
     EmpruntServiceDelete,
     UtilisateurPostService,
-    UtilisateurGetService
+    UtilisateurGetService,
+    UtilisateurPutService,
+    OTPService
 } from "./service/index";
-import { throwDeprecation } from "process";
+
 
 dotenv.config()
 
@@ -80,12 +86,15 @@ LivreRouterPost(router,new LivreServicePost(new LivreDAPost,new CacheService(new
 UtilisateurBadgedRouterGet(router,new UtilisateurServiceGet(new UtilisateurBadgedDAGet))
 UtilisateurRouterPost(router,new UtilisateurPostService(new UtilisateurDAPost,new UtilisateurServiceGet(new UtilisateurBadgedDAGet)))
 UtilisateurRouteGet(router,new UtilisateurGetService(new UtilisateurDAGet));
+UtilisateurRoutePut(router,new UtilisateurPutService(new UtilisateurPutDataAccess,new UtilisateurDAGet,new OTPDataAcces))
 
 EmpruntRouterPost(router,new EmpruntServicePost(new EmpruntDAPost,new UtilisateurBadgedDAGet,new LivreDAGet,new LivreDAPut))
 EmpruntRouterGet(router,new EmpruntServiceGet(new EmpruntDAGet));
 EmpruntRouterDelete(router,new EmpruntServiceDelete(new EmpruntDADelete,new LivreServicePut(new LivreDAPut),new EmpruntDAGet,new EmpruntDAPost));
 
 AvisRouterPost(router,new AvisServicePost(new AvisDAPost))
+
+OTPRoutes(router,new OTPService(new OTPDataAcces),new UtilisateurPutService(new UtilisateurPutDataAccess,new UtilisateurDAGet,new OTPDataAcces))
 
 
 app.listen(port, async () =>{
