@@ -7,18 +7,18 @@ export const limiterRequests = rateLimit({
         status: ReasonPhrases.REQUEST_TIMEOUT,
         message: 'to many request, please try again later'
     },
-    limit: 3,
+    limit: 80,
     standardHeaders: true,
     legacyHeaders: false
 })
 
 export const limiterRequestsOtp = rateLimit({
-    windowMs: 8 * 60 * 100,
+    windowMs: 30 * 60 * 100,
     message: {
         status: ReasonPhrases.REQUEST_TIMEOUT,
         message: 'to many request, please try again later'
     },
-    limit: 2,
+    limit: 3,
     standardHeaders: true,
     legacyHeaders: false
 })

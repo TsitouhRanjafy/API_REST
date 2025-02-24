@@ -5,6 +5,7 @@ import { UtilisateurServiceGet } from "./utilisateurGet-badged.service";
 import  bcrypt  from 'bcrypt'
 import  jwt, { JwtPayload }  from "jsonwebtoken";
 import { comparePassword, generateToken, hashPassword } from "../../utils";
+import { config } from "../../config/env";
 
 export class UtilisateurPostService {
 
@@ -58,17 +59,13 @@ export class UtilisateurPostService {
                 return;
             };
 
-            if (!process.env.JWT_KEY) {
-                return;
-            };
-
             // generer un token
             const token = generateToken({
                 firstname: isUserExist.firstname,
                 lastname: isUserExist.lastname,
                 email: isUserExist.email,
                 password: isUserExist.password
-            },process.env.JWT_KEY)
+            },config.JWT_KEY)
 
             return Object.assign({},{ id: isUserExist.id? isUserExist.id : null }, { token: token });
         } catch (error) {
@@ -80,15 +77,12 @@ export class UtilisateurPostService {
         try {
             const token = Token;
             if (!token) return;
-            if (!process.env.JWT_KEY) {;
-                // jwt .env non trouvé
-                return;
-            };
+
             // Analysez la chaîne JWT et stockez le résultat dans `payload`.
             // Notez que nous transmettons également la clé dans cette méthode. Cette méthode génèrera une erreur
             // si le jeton n'est pas valide (s'il a expiré conformément au délai d'expiration que nous avons défini lors de la connexion),
             // ou si la signature ne correspond pas
-            const payload = jwt.verify(token,process.env.JWT_KEY)   
+            const payload = jwt.verify(token,config.JWT_KEY)   
             return payload;
         } catch (error) {
             if (error instanceof jwt.JsonWebTokenError) {

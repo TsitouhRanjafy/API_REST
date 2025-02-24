@@ -1,8 +1,7 @@
 import express,{ Application } from "express";
-import dotenv from 'dotenv';
 import cors from 'cors';
 import cookieParser from "cookie-parser";
-import { rateLimit } from "express-rate-limit";
+
 
 import { 
     EmpruntDAPost, 
@@ -57,20 +56,16 @@ import {
     UtilisateurPutService,
     OTPService
 } from "./service/index";
-import { ReasonPhrases } from "http-status-codes";
 import { limiterRequests } from "./utils";
+import { config } from "./config/env";
 
-
-dotenv.config()
 
 const app : Application = express();
 const router = express.Router();
-const port = process.env.PORT || 3000
-
 
 
 app.use(cors({
-    origin: process.env.DOMAIN_ORIGIN,
+    origin: config.DOMAIN_ORIGIN,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: [ 'Content-type','Authorization' ]
@@ -102,10 +97,10 @@ AvisRouterPost(router,new AvisServicePost(new AvisDAPost))
 OTPRoutes(router,new OTPService(new OTPDataAcces),new UtilisateurPutService(new UtilisateurPutDataAccess,new UtilisateurDAGet,new OTPDataAcces))
 
 
-app.listen(port, async () =>{
+app.listen(config.PORT, async () =>{
     const cacheService = new CacheService(new CacheDataDASet,new CacheDataDAGet,new LivreDAGet,new DACache);
     try{
-        console.log(`   \n server running on port ${port} \n`);
+        console.log(`   \n server running on port ${config.PORT} \n`);
         syncDatabaseMysql();
         connectMongo();    
         await cacheService.CacheNombreToutLivre("nombreToutLivre");
