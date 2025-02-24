@@ -1,6 +1,6 @@
 import randomstring from "randomstring"
 import jwt from 'jsonwebtoken'
-import { IPostUser } from "../types"
+import { IPostUser } from "../../types"
 
 export const generateOTP = () => {
     return randomstring.generate({

@@ -1,7 +1,7 @@
-import { comparePassword, hashPassword } from "./hash";
-import { emailTemplate } from "./email.template";
-import { generateOTP, generateToken } from "./generator";
-import { limiterRequests, limiterRequestsOtp } from "./rate-limite";
+import { comparePassword, hashPassword } from "./security/hash";
+import { emailTemplate } from "./email/email.template";
+import { generateOTP, generateToken } from "./helpers/generator";
+import { limiterRequests, limiterRequestsOtp } from "./security/rate-limite";
 
 
 export {
