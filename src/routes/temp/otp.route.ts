@@ -1,10 +1,11 @@
 import { Router, Request, Response} from "express";
 import { UtilisateurPutService, OTPService } from "../../service";
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import { limiterRequestsOtp } from "../../utils";
 
 export const OTPRoutes = (router: Router, serviceOTP: OTPService, serivceUserPut: UtilisateurPutService) => {
 
-    router.post('/sendotp', async (req: Request, res: Response) => {
+    router.post('/sendotp',limiterRequestsOtp, async (req: Request, res: Response) => {
 
         const  dataEmail  = req.query.email
 

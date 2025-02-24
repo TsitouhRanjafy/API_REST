@@ -1,7 +1,8 @@
-import express,{ Application , Request, Response, NextFunction} from "express";
+import express,{ Application } from "express";
 import dotenv from 'dotenv';
 import cors from 'cors';
 import cookieParser from "cookie-parser";
+import { rateLimit } from "express-rate-limit";
 
 import { 
     EmpruntDAPost, 
@@ -56,6 +57,8 @@ import {
     UtilisateurPutService,
     OTPService
 } from "./service/index";
+import { ReasonPhrases } from "http-status-codes";
+import { limiterRequests } from "./utils";
 
 
 dotenv.config()
@@ -65,12 +68,14 @@ const router = express.Router();
 const port = process.env.PORT || 3000
 
 
+
 app.use(cors({
     origin: process.env.DOMAIN_ORIGIN,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: [ 'Content-type','Authorization' ]
 }));
+app.use(limiterRequests)
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(cookieParser());
@@ -108,5 +113,12 @@ app.listen(port, async () =>{
         throw error
     } 
 })
+
+
+
+
+
+
+
 
 
